@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html class="ctgo-layout "><head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="shortcut icon" type="image/x-icon" href="https://login.contargo.net/auth/resources/4.8.3.final/login/cola-prod/img/mycola-favicon.ico">
+    <title>Contargo® COLA Traffic Lights</title>
+    <style>html.ctgo-layout{height:100%}.ctgo-layout-body{display:table;width:100%;height:100%}.ctgo-layout-main{display:table-row;height:100%}.ctgo-layout-footer{display:table-row;height:1px}.ctgo-header{font-size:15px;background:#fff;-moz-box-shadow:inset 0 4px #002f5c,inset 0 8px #66b630,inset 0 9px rgba(59,92,36,.7);-webkit-box-shadow:inset 0 4px #002f5c,inset 0 8px #66b630,inset 0 9px rgba(59,92,36,.7);-o-box-shadow:inset 0 4px #002f5c,inset 0 8px #66b630,inset 0 9px rgba(59,92,36,.7);box-shadow:inset 0 4px #002f5c,inset 0 8px #66b630,inset 0 9px rgba(59,92,36,.7);padding-top:23px}.ctgo-header a{color:#00a7ce}.ctgo-header a:active,.ctgo-header a:hover{color:#07d0ff}.ctgo-logo{margin:0;padding:0;display:inline-block;width:150px;height:31px;color:transparent!important;text-decoration-color:transparent!important;background-image:url(files/ctgo-logo.png);text-indent:100%;white-space:nowrap;overflow:hidden}@media only screen and (-webkit-min-device-pixel-ratio:1.3),only screen and (min--moz-device-pixel-ratio:1.3),only screen and (-o-min-device-pixel-ratio:1.3 / 1),only screen and (min-resolution:125dpi),only screen and (min-resolution:1.3dppx){.ctgo-logo{background-image:url(/auth/resources/4.8.3.final/login/cola-prod/img/ctgo-logo_2x.png);background-size:150px 31px}}.ctgo-header>.ctgo-logo{margin-left:12px;margin-bottom:12px}.ctgo-subnav{color:#fff;background-color:#616163;display:none;margin:0;padding:0;height:36px;line-height:36px;font-size:13px}.ctgo-subnav.light{color:#000;background:#d2d2d3}.ctgo-subnav:after{content:"";display:table;clear:both}.ctgo-subnav .ctgo-nav--items{list-style:none;padding:0;margin:0}.ctgo-subnav .ctgo-nav--items>.ctgo-nav--item{line-height:36px;float:left;margin-right:8px;font-weight:300;text-transform:uppercase}.ctgo-subnav .ctgo-nav--items>.ctgo-nav--item.pull-right:first-child,.ctgo-subnav .ctgo-nav--items>.ctgo-nav--item:last-child{margin-right:0}.ctgo-subnav .ctgo-nav--items>.ctgo-nav--item.pull-right{margin-right:0;margin-left:8px}.ctgo-subnav .ctgo-nav--items>.ctgo-nav--item>a{padding:0 0 7.5px;color:rgba(255,255,255,.5);text-decoration:none}.ctgo-subnav .ctgo-nav--items>.ctgo-nav--item>a:focus,.ctgo-subnav .ctgo-nav--items>.ctgo-nav--item>a:hover{color:#fff}.ctgo-subnav .ctgo-nav--items>.ctgo-nav--item.is-active>a{font-size:14px;color:#fff;font-weight:600}.ctgo-subnav .ctgo-nav--items.pull-right{display:none}.ctgo-subnav.light .ctgo-nav--items>.ctgo-nav--item{font-weight:400}.ctgo-subnav.light .ctgo-nav--items>.ctgo-nav--item>a{color:rgba(0,0,0,.4)}.ctgo-subnav.light .ctgo-nav--items>.ctgo-nav--item.is-active>a,.ctgo-subnav.light .ctgo-nav--items>.ctgo-nav--item>a:focus,.ctgo-subnav.light .ctgo-nav--items>.ctgo-nav--item>a:hover{color:#000}@media (min-width:768px){.ctgo-subnav{display:block}}
+    </style>
+    <style>
+        .wrapper {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            grid-auto-rows: 200px;
+            grid-template-areas:
+    ". a a ."
+    ". a a .";
+        }
+        .item {
+            font-size: 70px;
+            height: 40%;
+            align-self: center;
+            justify-self: center;
+        }
+        .indicator {
+            height:1%;
+            width: 100%;
+            display:block;
+            background-color: #4b4b4d;
+        }
+    </style>
+
+
+</head>
+
+<body class="ctgo-layout-body">
+
+<header class="ctgo-header">
+    <nav class="ctgo-nav">
+        <div class="container-fluid">
+            <a href="https://www.contargo.net/" class="ctgo-logo"><h1>Contargo ® <small>trimodal network</small></h1></a>
+        </div>
+    </nav>
+</header>
+
+<nav class="ctgo-subnav light">
+    <div class="container">
+    </div>
+</nav>
+
+<main class="ctgo-layout-main">
+    <div class="indicator"></div>
+    <div class="wrapper" >
+        <div></div>
+        <div class="item">
+            <p class="text"></p>
+            
+        </div>
+        <div class="item">
+            <img src="stop.svg" height=50% id="symbol">
+        </div>
+    </div>
+
+
+</main>
+
+<footer class="ctgo-layout-footer">
+    <div class="ctgo-footer light">
+        <small>Take the better route!</small>
+        <a href="#"><img src="files/ctgo-footer.svg"></a>
+    </div>
+</footer>
+
+<link rel="stylesheet" href="files/contargo-open-sans.css" media="all" onload="if(media!='all')media='all'">
+<link rel="stylesheet" href="files/contargo-bootstrap-theme-light.css">
+<link rel="stylesheet" href="files/contargo-cola-starter.css">
+<link rel="stylesheet" href="files/contargo-font-awesome.css" media="all" onload="if(media!='all')media='all'">
+
+<link rel="stylesheet" href="files/style-v041.css">
+
+<script src="files/jquery.js"></script>
+<script src="files/bootstrap.js"></script>
+
+<script src="files/script.js"></script>
+
+<script>
+    let online = true;
+    let fsmState = 'idle';
+
+    function timeOutToIdle(timeout) {
+        setTimeout(() => {
+            fsmState = 'idle';
+            onEnterIdle();
+        }, timeout * 1000);
+    }
+
+    function changeSymbol(newImage) {
+        document.getElementById('symbol').src=newImage;
+    }
+
+    function setTextBackgroundAndSymbol(text, color, symbol) {
+        $('.text').text(text);
+        $('.indicator').css('background-color', color);
+        changeSymbol(symbol);
+    }
+    
+    function setTextBackgroundWithNoSymbol(text, color) {
+        setTextBackgroundAndSymbol(text, color, '');
+    }
+    
+    function onEnterError(errorMessage) {
+        timeOutToIdle(7);
+        switch(errorMessage) {
+            case 'net.contargo.gatecontrol.validation.failure.maxnumberoftrucksreached':
+                return setTextBackgroundAndSymbol('Terminal voll', 'orange', 'stau.svg');
+            case 'net.contargo.gatecontrol.validation.failure.permissionnotfound':
+                return setTextBackgroundAndSymbol('Zufahrtsberechtigung nicht gefunden', 'red', 'entry_forbidden.svg')
+            case 'net.contargo.gatecontrol.validation.failure.handlingnotfinished':
+                return setTextBackgroundAndSymbol('Warte auf Ausfahrtsgenehmigung, bitte versuchen sie es in wenigen Sekunden erneut', 'yellow', 'stop.svg');
+            default:
+                return setTextBackgroundAndSymbol('Unbekannter Fehler, bitte klingeln und Personal informieren!', 'red', 'stop.svg')
+        }
+    }
+
+    function onEnterIdle() {
+        setTextBackgroundWithNoSymbol('Bitte Zufahrtsberechtigung scannen', 'green');
+    }
+
+    function onEnterOk() {
+        timeOutToIdle(7);
+        setTextBackgroundAndSymbol('Zufahrt genehmigt. Schranke wird geöffnet...', 'lightGreen', 'einfahren.svg');
+    }
+
+    function fsm(data) {
+        const event = data.FsmState;
+        const errorMessage = data.ErrorMessage;
+        switch(fsmState) {
+            case 'idle':
+                if(event === 'error') {
+                    fsmState = 'error';
+                    onEnterError(errorMessage);
+                }
+                if (event === 'gating') {
+                    fsmState = 'ok';
+                    onEnterOk();
+                }
+                break;
+            case 'error':
+                if(event === 'gating') {
+                    fsmState = 'ok';
+                    onEnterOk();
+                }
+
+                break;
+            case 'ok':
+                break;
+        }
+    }
+
+    function enterRabbitOffline() {
+        setTextBackgroundWithNoSymbol('Anlage ist außer Betrieb', 'red');
+    } 
+    
+    function enterRabbitOnline() {
+        onEnterIdle();
+    }
+
+    function enterTrafficLightOffline() {
+        setTextBackgroundWithNoSymbol('Anlage außer Betrieb, Scan ggf. trotzdem möglich', 'yellow');
+        online = false 
+    }
+    
+    function enterTrafficLightOnline() {
+        window.location.reload()
+    }
+    
+    function connect(onMessageCb, connErrorCounter) {
+        connErrorCounter = connErrorCounter || 0;
+        websocketConnection = new WebSocket('ws://localhost:8080/echo');
+        websocketConnection.onclose = () => {
+            if(online) {
+                enterTrafficLightOffline()
+            }
+            if (connErrorCounter < 10) {
+                connErrorCounter++;
+            }
+            websocketConnection = null;
+            setTimeout(() => {
+                console.log('retry in ' + connErrorCounter);
+                connect(onMessageCb, connErrorCounter);
+            }, 1000 * connErrorCounter);
+        };
+        websocketConnection.onmessage = onMessageCb;
+        websocketConnection.onerror = () => {
+            websocketConnection.close();
+        };
+        websocketConnection.onopen = () => {
+            if(!online) {
+                enterTrafficLightOnline()
+            }
+            fsmState = 'idle';
+            onEnterIdle();
+        };
+    }
+
+
+    function recognizeMsg(data, onlineMessageCB, fsmCallback) {
+        if(typeof data.IsOnline == 'boolean'){
+            onlineMessageCB(data);
+        } else {
+            fsmCallback(data);
+        }
+    }
+    
+    function handleOnlineMsg(data) {
+        if (data.IsOnline === true) {
+            if (!online) {
+                enterRabbitOnline();
+                online = true;
+            }
+        } else if (data.IsOnline === false) {
+            if (online) {
+                enterRabbitOffline();
+                online = false;
+            }
+        }
+    }
+    
+    window.addEventListener('load', function () {
+        connect(evt => {
+            const data = JSON.parse(evt.data);
+            recognizeMsg(data, data => handleOnlineMsg(data), data => fsm(data));
+        });
+
+    });
+</script>
+
+
+
+
+</body></html>
