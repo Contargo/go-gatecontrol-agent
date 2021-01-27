@@ -1,0 +1,31 @@
+digraph agent {
+    rankdir=LR;
+    size="8,5"
+
+    node [shape=point]; start;
+    node [fixedsize=true,width=1.2];
+    node [shape=doublecircle]; idle;
+    node [shape=circle];
+    edge [fontsize=14]
+
+    start
+    start -> idle;
+
+    idle;
+    idle -> validating [label="scanned"];
+
+    validating;
+    validating -> printing [label="validated"];
+    validating -> error [color=red,label="failed"];
+
+    printing;
+    printing -> gating [label="printed"];
+    printing -> error [color=red,label="failed"];
+
+    gating;
+    gating -> idle [label="finished"];
+    gating -> error [color=red,label="failed"];
+
+    error;
+    error -> idle [label="reset"];
+}
