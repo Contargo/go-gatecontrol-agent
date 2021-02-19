@@ -2,12 +2,16 @@ package trafficlights
 
 import (
 	worker "contargo.net/gatecontrol/gatecontrol-agent/pkg/agent"
-	"github.com/gobuffalo/packr/v2"
+	"embed"
 	"github.com/gorilla/websocket"
+	"io/fs"
 	"log"
 	"net/http"
 	"sync"
 )
+
+//go:embed staticAssets
+var staticAssets embed.FS
 
 type Status struct {
 	FsmState     string
@@ -121,10 +125,11 @@ func (ws *Webserver) echo(w http.ResponseWriter, r *http.Request) {
 
 func (ws *Webserver) Start(listenAddress string) error {
 	log.Println("starting traffic lights on", listenAddress)
-	box := packr.New("staticAssets", "./staticAssets")
-
-	http.Handle("/", http.FileServer(box))
-
+	dir, err := fs.Sub(staticAssets, "staticAssets")
+	if err != nil {
+		return err
+	}
+	http.Handle("/", http.FileServer(http.FS(dir)))
 	http.HandleFunc("/echo", ws.echo)
 	return http.ListenAndServe(listenAddress, nil)
 }
