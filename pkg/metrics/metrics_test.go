@@ -39,7 +39,7 @@ func assertState(t *testing.T, expectedNumericalState int, actualData string) {
 
 func TestMetrics(t *testing.T) {
 	t.Run("should reflect state changes in influx", func(t *testing.T) {
-		scanRequest := agent.NewScanRequest("", 123, agent.PurposeEntry, scanner.Token{"token", "scanner 1"})
+		scanRequest := agent.NewScanRequest("", 123, agent.PurposeEntry, *scanner.NewToken("token", "scanner 1"))
 		shutdownChan := make(chan struct{})
 		metricsChannel := make(chan interface{})
 
@@ -57,7 +57,7 @@ func TestMetrics(t *testing.T) {
 	})
 
 	t.Run("should also reflect errors in influx", func(t *testing.T) {
-		scanRequest := agent.NewScanRequest("", 123, agent.PurposeEntry, scanner.Token{"token", "scanner 1"})
+		scanRequest := agent.NewScanRequest("", 123, agent.PurposeEntry, *scanner.NewToken("token", "scanner 1"))
 		scanRequest.Fail(errors.New("sample error"))
 		influxClientMock := InfluxClientMock{make(chan string, 4)}
 		shutdownChan := make(chan struct{})

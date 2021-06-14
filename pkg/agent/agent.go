@@ -1,11 +1,12 @@
 package agent
 
 import (
-	"contargo.net/gatecontrol/gatecontrol-agent/pkg/scanner"
 	"context"
 	"log"
 	"sync"
 	"time"
+
+	"contargo.net/gatecontrol/gatecontrol-agent/pkg/scanner"
 )
 
 const (
@@ -28,6 +29,10 @@ type ScanRequest struct {
 	purpose      GatePurpose
 	token        scanner.Token
 	error        error
+}
+
+func (s *ScanRequest) Source() string {
+	return string(s.token.ScanSource)
 }
 
 // NewScanRequest creates a new scan request.
@@ -89,7 +94,7 @@ type Agent struct {
 	mu                     sync.Mutex
 }
 
-// Listen listens on configured input channels and handles incoming requests.
+// ReadAndStartListen listens on configured input channels and handles incoming requests.
 func (a *Agent) Listen() {
 	defer a.closeDoneChan()
 

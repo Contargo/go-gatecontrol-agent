@@ -4,6 +4,7 @@ import (
 	"contargo.net/gatecontrol/gatecontrol-agent/pkg/buildinfo"
 	"encoding/json"
 	"log"
+	"os"
 
 	"github.com/streadway/amqp"
 )
@@ -68,9 +69,20 @@ func (p *Publisher) Publish() error {
 	return err
 }
 
+func getHostname() string {
+	hostname, err := os.Hostname()
+	if err != nil {
+		log.Println("cannot get hostname", err)
+		return ""
+	}
+	return hostname
+}
+
 func (p *Publisher) status() Status {
 	gates := []GateStatus{}
 	scanners := []ScannerStatus{}
+
+	hostname := getHostname()
 
 	for name, status := range p.gateStatus {
 		gates = append(gates, GateStatus{name, status})
@@ -81,6 +93,7 @@ func (p *Publisher) status() Status {
 	}
 
 	return Status{
+		Hostname:    hostname,
 		Application: Application{p.name, p.instance, buildinfo.GitSHA},
 		Terminal:    Terminal{p.location, p.loadingPlace},
 		Gates:       gates,

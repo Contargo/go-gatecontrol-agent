@@ -2,8 +2,11 @@ package scanner
 
 import (
 	"context"
+	"strings"
 	"sync"
 	"time"
+
+	"github.com/google/uuid"
 )
 
 const (
@@ -25,9 +28,44 @@ type Status struct {
 	Error error
 }
 
+type ScanSource string
+
+const (
+	Invalid       ScanSource = "INVALID"
+	Paper         ScanSource = "PAPER"
+	TruckersTrust ScanSource = "TRUCKERS_TRUST"
+)
+
 type Token struct {
-	Content string
-	Scanner string
+	Content    string
+	Scanner    string
+	ScanSource ScanSource
+}
+
+func getScanSource(rawContent string) ScanSource {
+	if strings.HasPrefix(rawContent, "tt-") {
+		return TruckersTrust
+	}
+	return Paper
+}
+
+func NewToken(rawContent, scanner string) *Token {
+	content := strings.Replace(rawContent, "tt-", "", 1)
+	return &Token{
+		content,
+		scanner,
+		getScanSource(rawContent),
+	}
+}
+
+func (t *Token) IsValidUUID() bool {
+	if strings.HasPrefix(t.Content, "tt-") {
+		replacedToken := strings.Replace(t.Content, "tt-", "", 1)
+		_, err := uuid.Parse(replacedToken)
+		return err == nil
+	}
+	_, err := uuid.Parse(t.Content)
+	return err == nil
 }
 
 // A ReopeningScanner is a Scanner that tries to reopen whenever it gets closed.
@@ -51,7 +89,7 @@ func NewReopeningScanner(name string, opener Opener) *ReopeningScanner {
 	}
 }
 
-// Listen listens on the configured scanner and notifies subscribers about
+// ReadAndStartListen listens on the configured scanner and notifies subscribers about
 // tokens and status updates.
 func (s *ReopeningScanner) Listen() {
 	defer close(s.doneChan)
@@ -154,10 +192,10 @@ func (s *ReopeningScanner) NotifyStatus(ch chan Status) {
 }
 
 func (s *ReopeningScanner) dispatchToken(token string) {
-	tokenContainer := Token{token, s.scanner.name}
+	tokenContainer := NewToken(token, s.scanner.name)
 	for _, ch := range s.tokenChans {
 		select {
-		case ch <- tokenContainer:
+		case ch <- *tokenContainer:
 		default:
 		}
 	}

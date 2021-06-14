@@ -1,242 +1,426 @@
 <!DOCTYPE html>
-<html class="ctgo-layout "><head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<html translate="no">
+  
+  <head>
     <meta charset="UTF-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="shortcut icon" type="image/x-icon" href="files/mycola-favicon.ico">
     <title>Contargo® COLA Traffic Lights</title>
-    <style>html.ctgo-layout{height:100%}.ctgo-layout-body{display:table;width:100%;height:100%}.ctgo-layout-main{display:table-row;height:100%}.ctgo-layout-footer{display:table-row;height:1px}.ctgo-header{font-size:15px;background:#fff;-moz-box-shadow:inset 0 4px #002f5c,inset 0 8px #66b630,inset 0 9px rgba(59,92,36,.7);-webkit-box-shadow:inset 0 4px #002f5c,inset 0 8px #66b630,inset 0 9px rgba(59,92,36,.7);-o-box-shadow:inset 0 4px #002f5c,inset 0 8px #66b630,inset 0 9px rgba(59,92,36,.7);box-shadow:inset 0 4px #002f5c,inset 0 8px #66b630,inset 0 9px rgba(59,92,36,.7);padding-top:23px}.ctgo-header a{color:#00a7ce}.ctgo-header a:active,.ctgo-header a:hover{color:#07d0ff}.ctgo-logo{margin:0;padding:0;display:inline-block;width:150px;height:31px;color:transparent!important;text-decoration-color:transparent!important;background-image:url(files/ctgo-logo.png);text-indent:100%;white-space:nowrap;overflow:hidden}@media only screen and (-webkit-min-device-pixel-ratio:1.3),only screen and (min--moz-device-pixel-ratio:1.3),only screen and (-o-min-device-pixel-ratio:1.3 / 1),only screen and (min-resolution:125dpi),only screen and (min-resolution:1.3dppx){.ctgo-logo{background-image:url(/auth/resources/4.8.3.final/login/cola-prod/img/ctgo-logo_2x.png);background-size:150px 31px}}.ctgo-header>.ctgo-logo{margin-left:12px;margin-bottom:12px}.ctgo-subnav{color:#fff;background-color:#616163;display:none;margin:0;padding:0;height:36px;line-height:36px;font-size:13px}.ctgo-subnav.light{color:#000;background:#d2d2d3}.ctgo-subnav:after{content:"";display:table;clear:both}.ctgo-subnav .ctgo-nav--items{list-style:none;padding:0;margin:0}.ctgo-subnav .ctgo-nav--items>.ctgo-nav--item{line-height:36px;float:left;margin-right:8px;font-weight:300;text-transform:uppercase}.ctgo-subnav .ctgo-nav--items>.ctgo-nav--item.pull-right:first-child,.ctgo-subnav .ctgo-nav--items>.ctgo-nav--item:last-child{margin-right:0}.ctgo-subnav .ctgo-nav--items>.ctgo-nav--item.pull-right{margin-right:0;margin-left:8px}.ctgo-subnav .ctgo-nav--items>.ctgo-nav--item>a{padding:0 0 7.5px;color:rgba(255,255,255,.5);text-decoration:none}.ctgo-subnav .ctgo-nav--items>.ctgo-nav--item>a:focus,.ctgo-subnav .ctgo-nav--items>.ctgo-nav--item>a:hover{color:#fff}.ctgo-subnav .ctgo-nav--items>.ctgo-nav--item.is-active>a{font-size:14px;color:#fff;font-weight:600}.ctgo-subnav .ctgo-nav--items.pull-right{display:none}.ctgo-subnav.light .ctgo-nav--items>.ctgo-nav--item{font-weight:400}.ctgo-subnav.light .ctgo-nav--items>.ctgo-nav--item>a{color:rgba(0,0,0,.4)}.ctgo-subnav.light .ctgo-nav--items>.ctgo-nav--item.is-active>a,.ctgo-subnav.light .ctgo-nav--items>.ctgo-nav--item>a:focus,.ctgo-subnav.light .ctgo-nav--items>.ctgo-nav--item>a:hover{color:#000}@media (min-width:768px){.ctgo-subnav{display:block}}
-    </style>
+    <link rel="stylesheet" href="files/contargo-bootstrap-theme-light.css">
     <style>
+        /*
+         * Default theme is dark text on bright background.
+         */
+        :root {
+          --bg: #fff;
+          --fg: #000;
+          --color-brand-blue: #002f5c;
+          --color-brand-green: #66b630;
+          --color-header-bg:  rgba(255, 255, 255, .9);
+          --color-footer-bg: rgb(210, 210, 211, .9);
+          /* Semantic colors, representing statuses */
+          --color-normal: var(--color-brand-green);
+          --color-danger:	#d30926;
+          --color-error:	#EE6558;
+          --color-warning:	#ff6010;
+          --color-info:	#fff379;
+          --color-success:	#67c180;
+          /* Typography */
+          --text-semi-bold: 600;
+          --text-letter-spacing: -.2rem;
+          --text-word-spacing: 2rem;
+        }
+        /*
+         * Dark-mode, or inverse - light text on dark background.
+         */
+        body.dark {
+          --bg: #000;
+          --fg: #fff;
+          --text-semi-bold: 400;
+        }
+
+        body {
+          display: flex;
+          min-height: 100vh;
+          flex-direction: column;
+          background-color: var(--bg);
+          color: var(--fg);
+        }
+        main {
+          flex: 1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+        }
+        header {
+          background: var(--color-header-bg);
+          box-shadow: 
+                      inset 0 4px var(--color-brand-blue),
+                      inset 0 8px var(--color-brand-green);
+          padding: 23px 12px 10px;
+        }
+        /*
+         * NOTE: Simplified and inlined (local) footer.
+         */
+        footer {
+          background: var(--color-footer-bg);
+          color: rgba(0, 0, 0, .3);
+          padding: 8px 12px;
+          display: flex;
+        }
+        footer > small {
+          flex: 1;
+        }
+        /*
+         * NOTE: We inline (local) the header/logo for, until there's a more
+         *       lightweight shared CSS resource, or asset, that provides a
+         *       better "bare minimum".
+         */
+        header .ctgo-logo {
+          display: inline-block;
+          background-image:url('./files/ctgo-logo.png');
+          width: 150px;
+          height: 31px;
+          color: transparent;
+          text-indent: 100%;
+          overflow: hidden;
+        }
+        /*
+         * Wrapper for the text and symbol content, ensures that we can retain
+         * horizontal and vertical centering, if we want to.
+         */
         .wrapper {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            grid-auto-rows: 200px;
-            grid-template-areas:
-    ". a a ."
-    ". a a .";
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          max-width: 84%;
+          position: relative;
+          top: -1rem;
         }
-        .item {
-            font-size: 70px;
-            height: 40%;
-            align-self: center;
-            justify-self: center;
-        }
+        /*
+         * A colored "bar", used to enhance the visual representation of the
+         * current system state.
+         */
         .indicator {
-            height:1%;
-            width: 100%;
-            display:block;
-            background-color: #4b4b4d;
+          transition: background-color 345ms ease-in-out;
+          display: block;
+          height: 1rem;
+        }
+        /*
+         * The system "state" or status, is applied as class on the body element,
+         * allowing for custom styling of any component, to represent the system
+         * state.
+         */
+        body.none    .indicator { background: transparent; }
+        body.normal  .indicator { background: var(--color-normal); }
+        body.info    .indicator { background: var(--color-info); }
+        body.warning .indicator { background: var(--color-warning); }
+        body.error   .indicator { background: var(--color-error); }
+        body.success .indicator { background: var(--color-success); }
+        /*
+         * Text message paragraph. Semi-dynamic font sizing, with the intent
+         * to maximize the default size, without breaking in (most) smaller
+         * displays.
+         */
+        .text {
+          justify-content: center;
+          font-weight: var(--text-semi-bold);
+          font-size: 7vw;
+          line-height: 1.3;
+          letter-spacing: var(--text-letter-spacing);
+          word-spacing: var(--text-word-spacing);
+        }
+        /*
+         * Optional pictogram, next to the text message.
+         */
+        .icon {
+          width: 20%;
+          align-self: center;
+          justify-self: center;
+          padding-left: 4rem;
         }
     </style>
+  </head>
 
+  <body>
+    <header>
+      <a href="https://www.contargo.net/" class="ctgo-logo">
+        <h1>Contargo® <small>trimodal network</small></h1>
+      </a>
+    </header>
+    <main>
+      <div class="wrapper">
+        <p class="text js-text" data-foo="4">&nbsp;</p>
+        <img src="" class="icon js-icon" />
+      </div>
+    </main>
+    <div class="indicator js-indicator"></div>
+    <footer>
+      <small>Take the better route!</small>
+      <img src="files/ctgo-footer.svg">
+    </footer>
 
-</head>
+    <link rel="stylesheet" href="files/contargo-open-sans.css" media="all" onload="if(media!='all')media='all'">
 
-<body class="ctgo-layout-body">
+    <script>
+      (function() {
+        /*
+         * The known FSM states. ()
+         */
+        const STATE_IDLE = 'idle';
+        const STATE_ERROR = 'error';
+        const STATE_OK = 'ok';
 
-<header class="ctgo-header">
-    <nav class="ctgo-nav">
-        <div class="container-fluid">
-            <a href="https://www.contargo.net/" class="ctgo-logo"><h1>Contargo ® <small>trimodal network</small></h1></a>
-        </div>
-    </nav>
-</header>
+        /*
+         * CSS classes that represent different types of process statuses.
+         */ 
+        const STATUS_SUCCESS = 'success';
+        const STATUS_NORMAL = 'normal';
+        const STATUS_INFO = 'info';
+        const STATUS_WARNING = 'warning';
+        const STATUS_ERROR = 'error';
+        const STATUS_NONE = 'none';
 
-<nav class="ctgo-subnav light">
-    <div class="container">
-    </div>
-</nav>
+        // NOTE: Retain all above, as an array.
+        const STATUSES = [
+            STATUS_SUCCESS,
+            STATUS_NORMAL, 
+            STATUS_INFO, 
+            STATUS_WARNING, 
+            STATUS_ERROR, 
+            STATUS_NONE,
+        ];
 
-<main class="ctgo-layout-main">
-    <div class="indicator"></div>
-    <div class="wrapper" >
-        <div></div>
-        <div class="item">
-            <p class="text"></p>
-            
-        </div>
-        <div class="item">
-            <img src="stop.svg" height=50% id="symbol">
-        </div>
-    </div>
+        /*
+         * Initialize the local state machine "initial state".
+         */
+        let online = true;
+        let fsmState = STATE_IDLE;
 
+        /*
+         * Establish direct references to elements we update often,
+         * assuming we are not structurally modifying the DOM. By convention
+         * we separate the custom query selector classes used here, from those
+         * for styling, using a `js-`-prefix, where necessary.
+         */
+        const $body = document.querySelector('body');
+        const $text = document.querySelector('.js-text');
+        const $icon = document.querySelector('.js-icon');
 
-</main>
-
-<footer class="ctgo-layout-footer">
-    <div class="ctgo-footer light">
-        <small>Take the better route!</small>
-        <a href="#"><img src="files/ctgo-footer.svg"></a>
-    </div>
-</footer>
-
-<link rel="stylesheet" href="files/contargo-open-sans.css" media="all" onload="if(media!='all')media='all'">
-<link rel="stylesheet" href="files/contargo-bootstrap-theme-light.css">
-<link rel="stylesheet" href="files/contargo-cola-starter.css">
-<link rel="stylesheet" href="files/contargo-font-awesome.css" media="all" onload="if(media!='all')media='all'">
-
-<link rel="stylesheet" href="files/style-v041.css">
-
-<script src="files/jquery.js"></script>
-<script src="files/bootstrap.js"></script>
-
-<script src="files/script.js"></script>
-
-<script>
-    let online = true;
-    let fsmState = 'idle';
-
-    function timeOutToIdle(timeout) {
-        setTimeout(() => {
-            fsmState = 'idle';
-            onEnterIdle();
-        }, timeout * 1000);
-    }
-
-    function changeSymbol(newImage) {
-        document.getElementById('symbol').src=newImage;
-    }
-
-    function setTextBackgroundAndSymbol(text, color, symbol) {
-        $('.text').text(text);
-        $('.indicator').css('background-color', color);
-        changeSymbol(symbol);
-    }
-    
-    function setTextBackgroundWithNoSymbol(text, color) {
-        setTextBackgroundAndSymbol(text, color, '');
-    }
-    
-    function onEnterError(errorMessage) {
-        timeOutToIdle(7);
-        switch(errorMessage) {
-            case 'net.contargo.gatecontrol.validation.failure.maxnumberoftrucksreached':
-                return setTextBackgroundAndSymbol('Terminal voll', 'orange', 'stau.svg');
-            case 'net.contargo.gatecontrol.validation.failure.permissionnotfound':
-                return setTextBackgroundAndSymbol('Zufahrtsberechtigung nicht gefunden', 'red', 'entry_forbidden.svg')
-            case 'net.contargo.gatecontrol.validation.failure.handlingnotfinished':
-                return setTextBackgroundAndSymbol('Warte auf Ausfahrtsgenehmigung, bitte versuchen sie es in wenigen Sekunden erneut', 'yellow', 'stop.svg');
-            default:
-                return setTextBackgroundAndSymbol('Unbekannter Fehler, bitte klingeln und Personal informieren!', 'red', 'stop.svg')
-        }
-    }
-
-    function onEnterIdle() {
-        setTextBackgroundWithNoSymbol('Bitte Zufahrtsberechtigung scannen', 'green');
-    }
-
-    function onEnterOk() {
-        timeOutToIdle(7);
-        setTextBackgroundAndSymbol('Zufahrt genehmigt. Schranke wird geöffnet...', 'lightGreen', 'einfahren.svg');
-    }
-
-    function fsm(data) {
-        const event = data.FsmState;
-        const errorMessage = data.ErrorMessage;
-        switch(fsmState) {
-            case 'idle':
-                if(event === 'error') {
-                    fsmState = 'error';
-                    onEnterError(errorMessage);
-                }
-                if (event === 'gating') {
-                    fsmState = 'ok';
-                    onEnterOk();
-                }
-                break;
-            case 'error':
-                if(event === 'gating') {
-                    fsmState = 'ok';
-                    onEnterOk();
-                }
-
-                break;
-            case 'ok':
-                break;
-        }
-    }
-
-    function enterRabbitOffline() {
-        setTextBackgroundWithNoSymbol('Anlage ist außer Betrieb', 'red');
-    } 
-    
-    function enterRabbitOnline() {
-        onEnterIdle();
-    }
-
-    function enterTrafficLightOffline() {
-        setTextBackgroundWithNoSymbol('Anlage außer Betrieb, Scan ggf. trotzdem möglich', 'yellow');
-        online = false 
-    }
-    
-    function enterTrafficLightOnline() {
-        window.location.reload()
-    }
-    
-    function connect(onMessageCb, connErrorCounter) {
-        connErrorCounter = connErrorCounter || 0;
-        websocketConnection = new WebSocket('ws://localhost:8080/echo');
-        websocketConnection.onclose = () => {
-            if(online) {
-                enterTrafficLightOffline()
-            }
-            if (connErrorCounter < 10) {
-                connErrorCounter++;
-            }
-            websocketConnection = null;
+        function timeOutToIdle(timeout) {
             setTimeout(() => {
-                console.log('retry in ' + connErrorCounter);
-                connect(onMessageCb, connErrorCounter);
-            }, 1000 * connErrorCounter);
-        };
-        websocketConnection.onmessage = onMessageCb;
-        websocketConnection.onerror = () => {
-            websocketConnection.close();
-        };
-        websocketConnection.onopen = () => {
-            if(!online) {
-                enterTrafficLightOnline()
+                fsmState = STATE_IDLE;
+                onEnterIdle();
+            }, timeout * 1000);
+        }
+
+        function setTextAndStatus(text, status) {
+            setStatusClass(status);
+            $text.innerHTML = text;
+            clearSymbol();
+        }
+
+        function setTextStatusAndSymbol(text, symbol, status) {
+            setStatusClass(status);
+            $text.innerHTML = text;
+            setSymbol(symbol);
+        }
+
+        function setStatusClass(statusClass = STATUS_NORMAL) {
+            // Only toggle declared status classes
+            if (STATUSES.some(status => statusClass === status)) {
+                // Clear any previously set status
+                $body.classList.remove(...STATUSES);
+                $body.classList.add(statusClass);
             }
-            fsmState = 'idle';
+        }
+
+        function setSymbol(symbol) {
+            $icon.src = symbol;
+            $icon.style.display = 'initial';
+        }
+
+        function clearSymbol() {
+            $icon.src = '';
+            $icon.style.display = 'none';
+        }
+
+        window.toggleDarkMode = function toggleDarkMode() {
+            $body.classList.toggle('dark');
+        }
+
+        // https://www.worlddata.info/europe/germany/sunset.php
+        const DAYLIGHT_IN_MONTH = [
+            /* Jan */ { sunrise: 7, sunset: 18 },
+            /* Feb */ { sunrise: 6, sunset: 19 },
+            /* Mar */ { sunrise: 5, sunset: 20 },
+            /* Apr */ { sunrise: 5, sunset: 21 },
+            /* May */ { sunrise: 4, sunset: 22 },
+            /* Jun */ { sunrise: 4, sunset: 23 },
+            /* Jul */ { sunrise: 4, sunset: 23 },
+            /* Aug */ { sunrise: 5, sunset: 22 },
+            /* Sep */ { sunrise: 6, sunset: 21 },
+            /* Oct */ { sunrise: 6, sunset: 20 },
+            /* Nov */ { sunrise: 6, sunset: 18 },
+            /* Dec */ { sunrise: 7, sunset: 17 },
+        ];
+
+        /*
+         * At an interval, check time and adjust day/night mode.
+         */
+        setInterval(adjustToCurrentDaylight, 1000 * 60 * 22);
+        // NOTE: And on restart/reload
+        adjustToCurrentDaylight();
+
+        function adjustToCurrentDaylight() {
+          // NOTE: Assuming sensible native time is available.
+          var now = new Date();
+          var daylight = DAYLIGHT_IN_MONTH[now.getMonth() - 1];
+          var hour = now.getHours();
+          if (hour < daylight.sunrise || hour > daylight.sunset) {
+            $body.classList.add('dark');
+          } else {
+            $body.classList.remove('dark');
+          }
+        }
+
+        window.onEnterError = function onEnterError(errorMessage) {
+            timeOutToIdle(7);
+            switch (errorMessage) {
+                case 'net.contargo.gatecontrol.validation.failure.maxnumberoftrucksreached':
+                    setTextStatusAndSymbol('Terminal voll', 'stau.svg', STATUS_WARNING);
+                    break;
+
+                case 'net.contargo.gatecontrol.validation.failure.permissionnotfound':
+                    setTextStatusAndSymbol('Fahranweisung nicht gefunden', 'entry_forbidden.svg', STATUS_ERROR);
+                    break;
+
+                case 'net.contargo.gatecontrol.validation.failure.handlingnotfinished':
+                    setTextStatusAndSymbol('Warte auf Ausfahrtsgenehmigung, bitte versuchen sie es in wenigen Sekunden erneut', 'stop.svg', STATUS_INFO);
+                    break;
+
+                default:
+                    setTextStatusAndSymbol('Unbekannter Fehler, bitte klingeln und Personal informieren!', 'stop.svg', STATUS_ERROR);
+            }
+        };
+
+        window.onEnterIdle = function onEnterIdle() {
+            setTextAndStatus('Bitte Fahranweisung scannen', STATUS_NORMAL);
+        }
+
+        window.onEnterOk = function onEnterOk() {
+            timeOutToIdle(7);
+            setTextStatusAndSymbol('Fahranweisung gültig. Schranke wird geöffnet...', 'einfahren.svg', STATUS_SUCCESS);
+        }
+
+        function fsm(data) {
+
+            const event = data.FsmState;
+            const errorMessage = data.ErrorMessage;
+
+            switch(fsmState) {
+                case STATE_IDLE:
+                    if (event === 'error') {
+                        fsmState = STATE_ERROR;
+                        onEnterError(errorMessage);
+                    }
+                    if (event === 'gating') {
+                        fsmState = STATE_OK;
+                        onEnterOk();
+                    }
+                    break;
+
+                case STATE_ERROR:
+                    if (event === 'gating') {
+                        fsmState = STATE_OK;
+                        onEnterOk();
+                    }
+                    break;
+
+                case STATE_OK:
+                    break;
+            }
+        }
+
+        window.enterRabbitOffline = function enterRabbitOffline() {
+            setTextAndStatus('Anlage ist außer Betrieb', STATUS_ERROR);
+        } 
+      
+        function enterRabbitOnline() {
             onEnterIdle();
-        };
-    }
-
-
-    function recognizeMsg(data, onlineMessageCB, fsmCallback) {
-        if(typeof data.IsOnline == 'boolean'){
-            onlineMessageCB(data);
-        } else {
-            fsmCallback(data);
         }
-    }
-    
-    function handleOnlineMsg(data) {
-        if (data.IsOnline === true) {
-            if (!online) {
-                enterRabbitOnline();
-                online = true;
-            }
-        } else if (data.IsOnline === false) {
-            if (online) {
-                enterRabbitOffline();
-                online = false;
+
+        function enterTrafficLightOffline() {
+            setTextAndStatus('Anlage außer Betrieb, Scan ggf. trotzdem möglich', STATUS_INFO);
+            online = false 
+        }
+      
+        function enterTrafficLightOnline() {
+            window.location.reload()
+        }
+      
+        function connect(onMessageCb, connErrorCounter) {
+            connErrorCounter = connErrorCounter || 0;
+            websocketConnection = new WebSocket('ws://localhost:8080/echo');
+            websocketConnection.onclose = () => {
+                if(online) {
+                    enterTrafficLightOffline()
+                }
+                if (connErrorCounter < 10) {
+                    connErrorCounter++;
+                }
+                websocketConnection = null;
+                setTimeout(() => {
+                    console.log('retry in ' + connErrorCounter);
+                    connect(onMessageCb, connErrorCounter);
+                }, 1000 * connErrorCounter);
+            };
+            websocketConnection.onmessage = onMessageCb;
+            websocketConnection.onerror = () => {
+                websocketConnection.close();
+            };
+            websocketConnection.onopen = () => {
+                if(!online) {
+                    enterTrafficLightOnline()
+                }
+                fsmState = STATE_IDLE;
+                onEnterIdle();
+            };
+        }
+
+        function recognizeMsg(data, onlineMessageCB, fsmCallback) {
+            if (typeof data.IsOnline == 'boolean'){
+                onlineMessageCB(data);
+            } else {
+                fsmCallback(data);
             }
         }
-    }
-    
-    window.addEventListener('load', function () {
-        connect(evt => {
-            const data = JSON.parse(evt.data);
-            recognizeMsg(data, data => handleOnlineMsg(data), data => fsm(data));
+      
+        function handleOnlineMsg(data) {
+            if (data.IsOnline === true) {
+                if (!online) {
+                    enterRabbitOnline();
+                    online = true;
+                }
+            } else if (data.IsOnline === false) {
+                if (online) {
+                    enterRabbitOffline();
+                    online = false;
+                }
+            }
+        }
+      
+        window.addEventListener('load', function () {
+            connect(evt => {
+                const data = JSON.parse(evt.data);
+                recognizeMsg(data, data => handleOnlineMsg(data), data => fsm(data));
+            });
         });
 
-    });
-</script>
+      })();
+    </script>
 
-
-
-
-</body></html>
+  </body>
+</html>

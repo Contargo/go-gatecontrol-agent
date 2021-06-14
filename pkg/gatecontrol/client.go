@@ -21,14 +21,14 @@ var (
 
 // A PermissionValidator validates a token.
 type PermissionValidator interface {
-	ValidateEntry(location string, loadingplace int64, token string) (bool, error)
-	ValidateExit(location string, loadingplace int64, token string) (bool, error)
+	ValidateEntry(location string, loadingplace int64, token string, scanSource string) (bool, error)
+	ValidateExit(location string, loadingplace int64, token string, scanSource string) (bool, error)
 }
 
 // A ProcessNotifier notifies about the process of a vehicle for token.
 type ProcessNotifier interface {
-	GatedIn(location string, loadingplace int64, token string) error
-	GatedOut(location string, loadingplace int64, token string) error
+	GatedIn(location string, loadingplace int64, token string, scanSource string) error
+	GatedOut(location string, loadingplace int64, token string, scanSource string) error
 }
 
 // A Client acts as a command sender and receiver for Gate-Control.
@@ -48,27 +48,27 @@ func NewClient(conn *chamqp.Connection) *Client {
 
 // ValidateEntry implements the PermissionValidator interface. It sends a
 // validate entry permission command to Gate-Control and returns the result.
-func (c *Client) ValidateEntry(location string, loadingplace int64, token string) (bool, error) {
-	return c.validate(validateEntry, permissionRequest{location, loadingplace, token})
+func (c *Client) ValidateEntry(location string, loadingplace int64, token string, scanSource string) (bool, error) {
+	return c.validate(validateEntry, permissionRequest{location, loadingplace, token, scanSource})
 }
 
 // ValidateExit implements the PermissionValidator interface. It sends a
 // validate exit permission command to Gate-Control and returns the result.
-func (c *Client) ValidateExit(location string, loadingplace int64, token string) (bool, error) {
-	return c.validate(validateExit, permissionRequest{location, loadingplace, token})
+func (c *Client) ValidateExit(location string, loadingplace int64, token string, scanSource string) (bool, error) {
+	return c.validate(validateExit, permissionRequest{location, loadingplace, token, scanSource})
 }
 
 // GatedIn implements the ProcessNotifier interface. It sends an use entry
 // permission command to Gate-Control that actually triggers a Gate In.
-func (c *Client) GatedIn(location string, loadingplace int64, token string) error {
-	_, err := c.use(useEntry, permissionRequest{location, loadingplace, token})
+func (c *Client) GatedIn(location string, loadingplace int64, token string, scanSource string) error {
+	_, err := c.use(useEntry, permissionRequest{location, loadingplace, token, scanSource})
 	return err
 }
 
 // GatedOut implements the ProcessNotifier interface. It sends an use exit
 // permission command to Gate-Control that actually triggers a Gate Out.
-func (c *Client) GatedOut(location string, loadingplace int64, token string) error {
-	_, err := c.use(useExit, permissionRequest{location, loadingplace, token})
+func (c *Client) GatedOut(location string, loadingplace int64, token string, scanSource string) error {
+	_, err := c.use(useExit, permissionRequest{location, loadingplace, token, scanSource})
 	return err
 }
 

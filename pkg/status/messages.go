@@ -25,6 +25,7 @@ type GateStatus EntityStatus
 type ScannerStatus EntityStatus
 
 type Status struct {
+	Hostname    string          `json:"hostname"`
 	Application Application     `json:"application"`
 	Terminal    Terminal        `json:"terminal"`
 	Gates       []GateStatus    `json:"gates"`

@@ -3,6 +3,7 @@ package status
 import (
 	"contargo.net/gatecontrol/gatecontrol-agent/pkg/buildinfo"
 	"fmt"
+	"os"
 	"testing"
 
 	"github.com/streadway/amqp"
@@ -35,6 +36,8 @@ func (c *DummyChannel) Publish(exchange, key string, mandatory, immediate bool, 
 
 func TestPublisherPublish(t *testing.T) {
 	t.Run("publishs status", func(t *testing.T) {
+		hostname, _ := os.Hostname()
+
 		buildinfo.GitSHA = "TerminalOperationsVersion"
 		ch := DummyChannel{}
 		publisher := NewPublisher("test", 23, "terminal", 42, &ch)
@@ -52,6 +55,7 @@ func TestPublisherPublish(t *testing.T) {
 		assert.Equal(t, false, ch.calls[0].immediate)
 		assert.Equal(t, "application/json", ch.calls[0].msg.ContentType)
 		assert.Equal(t, "{"+
+			"\"hostname\":\""+hostname+"\","+
 			"\"application\":{\"name\":\"test\",\"instance\":23,\"commitSha\":\"TerminalOperationsVersion\"},"+
 			"\"terminal\":{\"locationCode\":\"terminal\",\"loadingPlaceId\":42},"+
 			"\"gates\":[{\"name\":\"gate-1\",\"status\":\"UP\"}],"+

@@ -10,7 +10,7 @@ import (
 func TestCallbackFunc(t *testing.T) {
 	t.Run("Call calls func", func(t *testing.T) {
 		called := false
-		request := ScanRequest{token: scanner.Token{"test-token", "scanner 1"}}
+		request := ScanRequest{token: *scanner.NewToken("test-token", "scanner 1")}
 
 		fn := func(r ScanRequest) error {
 			called = true

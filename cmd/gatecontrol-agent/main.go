@@ -1,12 +1,8 @@
 package main
 
 import (
-	"contargo.net/gatecontrol/gatecontrol-agent/pkg/metrics_amqp"
-	"contargo.net/gatecontrol/gatecontrol-agent/pkg/rescan"
-	"contargo.net/gatecontrol/gatecontrol-agent/pkg/trafficlights"
 	"context"
 	"flag"
-	"github.com/Contargo/chamqp"
 	"log"
 	"os"
 	"os/signal"
@@ -14,13 +10,17 @@ import (
 	"sync"
 	"time"
 
+	"contargo.net/gatecontrol/gatecontrol-agent/pkg/metrics_amqp"
+	"contargo.net/gatecontrol/gatecontrol-agent/pkg/rescan"
+	"contargo.net/gatecontrol/gatecontrol-agent/pkg/trafficlights"
+	"github.com/Contargo/chamqp"
+
 	"contargo.net/gatecontrol/gatecontrol-agent/pkg/agent"
 	"contargo.net/gatecontrol/gatecontrol-agent/pkg/buildinfo"
 	"contargo.net/gatecontrol/gatecontrol-agent/pkg/gatecontrol"
 	"contargo.net/gatecontrol/gatecontrol-agent/pkg/metrics"
 	"contargo.net/gatecontrol/gatecontrol-agent/pkg/scanner"
 	"contargo.net/gatecontrol/gatecontrol-agent/pkg/status"
-	"github.com/google/uuid"
 )
 
 var (
@@ -247,10 +247,6 @@ func statusUpdater(wg *sync.WaitGroup,
 	}
 }
 
-func IsValidUUID(u string) bool {
-	_, err := uuid.Parse(u)
-	return err == nil
-}
 func tokenDispatcher(wg *sync.WaitGroup, a *agent.Agent, rescanHandler *rescan.RescanHandler, tokenChan chan scanner.Token, shutdownChan chan struct{}) {
 	wg.Add(1)
 	defer wg.Done()
@@ -258,7 +254,7 @@ func tokenDispatcher(wg *sync.WaitGroup, a *agent.Agent, rescanHandler *rescan.R
 	for {
 		select {
 		case token := <-tokenChan:
-			if !IsValidUUID(token.Content) {
+			if !token.IsValidUUID() {
 				log.Println("[", token, "]", "Ignoring scan request, seems to be a ghost scan")
 				continue
 			}

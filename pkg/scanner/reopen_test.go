@@ -35,7 +35,7 @@ func TestReopeningScanner_Listen(t *testing.T) {
 
 		ch := make(chan Token)
 		scanner.NotifyTokens(ch)
-		assert.Equal(t, <-ch, Token{"test-token", ""})
+		assert.Equal(t, <-ch, *NewToken("test-token", ""))
 	})
 	t.Run("notifies on up status", func(t *testing.T) {
 		scanner := NewReopeningScanner("scanner", DummyOpener("", ""))

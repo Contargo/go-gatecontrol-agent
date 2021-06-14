@@ -4,6 +4,7 @@ type permissionRequest struct {
 	Location     string `json:"location"`
 	Loadingplace int64  `json:"loadingplaceId"`
 	Token        string `json:"token"`
+	ScanSource   string `json:"scanSource"`
 }
 
 type message struct {

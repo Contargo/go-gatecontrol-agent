@@ -23,7 +23,7 @@ func (h *DummyHandler) Handle(ScanRequest) error {
 
 func TestAgent_ScanRequest(t *testing.T) {
 	t.Run("makes attributes available", func(t *testing.T) {
-		req := NewScanRequest("location", 42, PurposeEntry, scanner.Token{"token", "scanner 1"})
+		req := NewScanRequest("location", 42, PurposeEntry, *scanner.NewToken("token", "scanner 1"))
 		assert.Equal(t, "location", req.Location())
 		assert.Equal(t, int64(42), req.LoadingPlace())
 		assert.Equal(t, PurposeEntry, req.Purpose())
@@ -31,7 +31,7 @@ func TestAgent_ScanRequest(t *testing.T) {
 		assert.Nil(t, req.Error())
 	})
 	t.Run("can have errors", func(t *testing.T) {
-		req := NewScanRequest("location", 42, PurposeEntry, scanner.Token{"token", "scanner 1"})
+		req := NewScanRequest("location", 42, PurposeEntry, *scanner.NewToken("token", "scanner 1"))
 		err := fmt.Errorf("fail")
 		req.Fail(err)
 		assert.Equal(t, err, req.Error())
@@ -51,7 +51,7 @@ func TestAgent_Listen(t *testing.T) {
 
 		ch := make(chan interface{}, 10)
 		agent.Subscribe(ch)
-		scanRequest := ScanRequest{token: scanner.Token{"test-token", "scanner 1"}}
+		scanRequest := ScanRequest{token: *scanner.NewToken("test-token", "scanner 1")}
 		agent.getScanChan() <- scanRequest
 
 		assert.Equal(t, FsmScanRequest{ScanRequest: scanRequest, State: StateValidating}, <-ch)
@@ -106,7 +106,7 @@ func TestAgent_Subscribe(t *testing.T) {
 
 		ch := make(chan interface{}, 10)
 		agent.Subscribe(ch)
-		scanRequest := ScanRequest{token: scanner.Token{"test-token", "scanner 1"}}
+		scanRequest := ScanRequest{token: *scanner.NewToken("test-token", "scanner 1")}
 		agent.getScanChan() <- scanRequest
 
 		assert.Equal(t, FsmScanRequest{ScanRequest: scanRequest, State: StateValidating}, <-ch)
@@ -115,7 +115,7 @@ func TestAgent_Subscribe(t *testing.T) {
 		assert.Equal(t, FsmScanRequest{ScanRequest: scanRequest, State: StateIdle}, <-ch)
 
 		agent.Unsubscribe(ch)
-		agent.getScanChan() <- ScanRequest{token: scanner.Token{"test-token", "scanner 1"}}
+		agent.getScanChan() <- ScanRequest{token: *scanner.NewToken("test-token", "scanner 1")}
 
 		select {
 		case state := <-ch:

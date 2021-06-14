@@ -47,7 +47,7 @@ func (s *Scanner) Close() error {
 	return s.rc.Close()
 }
 
-// Listen creates a scanner that reads from rc.
+// ReadAndStartListen creates a scanner that reads from rc.
 func Listen(name, prefix string, rc io.ReadCloser) (*Scanner, error) {
 	scanner := &Scanner{
 		name:   name,

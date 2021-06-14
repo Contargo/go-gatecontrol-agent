@@ -56,14 +56,14 @@ func TestWorker_FSM(t *testing.T) {
 		w := newWorker(&DummyAgent{})
 		w.fsm.SetState(StateValidating)
 
-		err := w.Scan(ScanRequest{token: scanner.Token{"token", "scanner 1"}})
+		err := w.Scan(ScanRequest{token: *scanner.NewToken("token", "scanner 1")})
 		assert.EqualError(t, err, ErrBusy.Error())
 	})
 	t.Run("scan returns error when shutting down", func(t *testing.T) {
 		w := newWorker(&DummyAgent{})
 		w.Shutdown(context.Background())
 
-		err := w.Scan(ScanRequest{token: scanner.Token{"token", "scanner 1"}})
+		err := w.Scan(ScanRequest{token: *scanner.NewToken("token", "scanner 1")})
 		assert.EqualError(t, err, ErrShutdown.Error())
 	})
 	t.Run("scan without errors leads to idle", func(t *testing.T) {
@@ -74,7 +74,7 @@ func TestWorker_FSM(t *testing.T) {
 		w := newWorker(&a)
 		w.Subscribe(ch)
 
-		scanRequest := ScanRequest{token: scanner.Token{"token", "scanner 1"}}
+		scanRequest := ScanRequest{token: *scanner.NewToken("token", "scanner 1")}
 		err := w.Scan(scanRequest)
 		assert.NoError(t, err)
 
@@ -97,7 +97,7 @@ func TestWorker_FSM(t *testing.T) {
 		ch := make(chan interface{}, 1)
 		w := newWorker(&a)
 		w.Subscribe(ch)
-		scanRequest := ScanRequest{token: scanner.Token{"token", "scanner 1"}}
+		scanRequest := ScanRequest{token: *scanner.NewToken("token", "scanner 1")}
 		err := w.Scan(scanRequest)
 		assert.NoError(t, err)
 
@@ -117,7 +117,7 @@ func TestWorker_FSM(t *testing.T) {
 		ch := make(chan interface{}, 1)
 		w := newWorker(&a)
 		w.Subscribe(ch)
-		scanRequest := ScanRequest{token: scanner.Token{"token", "scanner 1"}}
+		scanRequest := ScanRequest{token: *scanner.NewToken("token", "scanner 1")}
 		err := w.Scan(scanRequest)
 		assert.NoError(t, err)
 
@@ -140,7 +140,7 @@ func TestWorker_FSM(t *testing.T) {
 		ch := make(chan interface{}, 1)
 		w := newWorker(&a)
 		w.Subscribe(ch)
-		scanRequest := ScanRequest{token: scanner.Token{"token", "scanner 1"}}
+		scanRequest := ScanRequest{token: *scanner.NewToken("token", "scanner 1")}
 		err := w.Scan(scanRequest)
 		assert.NoError(t, err)
 
@@ -167,7 +167,7 @@ func TestWorker_FSM(t *testing.T) {
 		w := newWorker(&a)
 		w.Subscribe(ch)
 
-		scanRequest := ScanRequest{token: scanner.Token{"token", "scanner 1"}}
+		scanRequest := ScanRequest{token: *scanner.NewToken("token", "scanner 1")}
 		err := w.Scan(scanRequest)
 		assert.NoError(t, err)
 
